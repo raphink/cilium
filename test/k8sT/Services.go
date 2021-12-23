@@ -254,6 +254,9 @@ var _ = SkipDescribeIf(helpers.RunsOn54Kernel, "K8sServicesTest", func() {
 			BeforeAll(func() {
 				DeployCiliumOptionsAndDNS(kubectl, ciliumFilename, map[string]string{
 					"hostServices.hostNamespaceOnly": "true",
+					// Enable Maglev to check if the Maglev LUT for ClusterIP is properly populated,
+					// and external clients can access ClusterIP with it.
+					"loadBalancer.algorithm": "maglev",
 				})
 
 				yamls = []string{"demo_ds.yaml"}
