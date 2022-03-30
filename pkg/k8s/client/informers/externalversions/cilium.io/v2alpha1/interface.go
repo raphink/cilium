@@ -11,6 +11,8 @@ import (
 
 // Interface provides access to all the informers in this group version.
 type Interface interface {
+	// CiliumClusterwideEnvoyConfigs returns a CiliumClusterwideEnvoyConfigInformer.
+	CiliumClusterwideEnvoyConfigs() CiliumClusterwideEnvoyConfigInformer
 	// CiliumEgressNATPolicies returns a CiliumEgressNATPolicyInformer.
 	CiliumEgressNATPolicies() CiliumEgressNATPolicyInformer
 	// CiliumEndpointSlices returns a CiliumEndpointSliceInformer.
@@ -28,6 +30,11 @@ type version struct {
 // New returns a new Interface.
 func New(f internalinterfaces.SharedInformerFactory, namespace string, tweakListOptions internalinterfaces.TweakListOptionsFunc) Interface {
 	return &version{factory: f, namespace: namespace, tweakListOptions: tweakListOptions}
+}
+
+// CiliumClusterwideEnvoyConfigs returns a CiliumClusterwideEnvoyConfigInformer.
+func (v *version) CiliumClusterwideEnvoyConfigs() CiliumClusterwideEnvoyConfigInformer {
+	return &ciliumClusterwideEnvoyConfigInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 
 // CiliumEgressNATPolicies returns a CiliumEgressNATPolicyInformer.

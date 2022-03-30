@@ -15,6 +15,7 @@ import (
 
 type CiliumV2alpha1Interface interface {
 	RESTClient() rest.Interface
+	CiliumClusterwideEnvoyConfigsGetter
 	CiliumEgressNATPoliciesGetter
 	CiliumEndpointSlicesGetter
 	CiliumEnvoyConfigsGetter
@@ -23,6 +24,10 @@ type CiliumV2alpha1Interface interface {
 // CiliumV2alpha1Client is used to interact with features provided by the cilium.io group.
 type CiliumV2alpha1Client struct {
 	restClient rest.Interface
+}
+
+func (c *CiliumV2alpha1Client) CiliumClusterwideEnvoyConfigs() CiliumClusterwideEnvoyConfigInterface {
+	return newCiliumClusterwideEnvoyConfigs(c)
 }
 
 func (c *CiliumV2alpha1Client) CiliumEgressNATPolicies() CiliumEgressNATPolicyInterface {

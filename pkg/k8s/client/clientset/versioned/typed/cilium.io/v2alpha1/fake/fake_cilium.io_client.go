@@ -15,6 +15,10 @@ type FakeCiliumV2alpha1 struct {
 	*testing.Fake
 }
 
+func (c *FakeCiliumV2alpha1) CiliumClusterwideEnvoyConfigs() v2alpha1.CiliumClusterwideEnvoyConfigInterface {
+	return &FakeCiliumClusterwideEnvoyConfigs{c}
+}
+
 func (c *FakeCiliumV2alpha1) CiliumEgressNATPolicies() v2alpha1.CiliumEgressNATPolicyInterface {
 	return &FakeCiliumEgressNATPolicies{c}
 }

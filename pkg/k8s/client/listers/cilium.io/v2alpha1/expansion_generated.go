@@ -5,6 +5,10 @@
 
 package v2alpha1
 
+// CiliumClusterwideEnvoyConfigListerExpansion allows custom methods to be added to
+// CiliumClusterwideEnvoyConfigLister.
+type CiliumClusterwideEnvoyConfigListerExpansion interface{}
+
 // CiliumEgressNATPolicyListerExpansion allows custom methods to be added to
 // CiliumEgressNATPolicyLister.
 type CiliumEgressNATPolicyListerExpansion interface{}
